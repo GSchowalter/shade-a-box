@@ -44,7 +44,7 @@ export default function ControlPanel({
   };
 
   return (
-    <div className="w-64 h-full bg-black p-4 overflow-y-auto">
+    <div className="w-full h-full bg-black p-4 overflow-y-auto">
       <h1 className="text-xl font-bold mb-4">Light Room Controls</h1>
       
       {/* Tab Navigation */}
@@ -73,7 +73,7 @@ export default function ControlPanel({
       {activeTab === 'shapes' && (
         <div>
           <h2 className="font-bold mb-2">Add Shape</h2>
-          <div className="grid grid-cols-2 gap-2 mb-4">
+          <div className="grid grid-cols-2 gap-2 mb-4 ">
             <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={() => addShape('box')}>Box</button>
             <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={() => addShape('sphere')}>Sphere</button>
             <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={() => addShape('cylinder')}>Cylinder</button>
@@ -83,7 +83,7 @@ export default function ControlPanel({
           
           <h2 className="font-bold mb-2">Select Shape</h2>
           <select 
-            className="w-full mb-4 p-2 border"
+            className="w-full mb-4 p-2 border bg-black"
             value={selectedShapeId}
             onChange={e => setSelectedShapeId(parseInt(e.target.value))}
           >
@@ -101,17 +101,13 @@ export default function ControlPanel({
               <div className="mb-3">
                 <label className="block mb-1">Material</label>
                 <select 
-                  className="w-full p-2 border"
+                  className="w-full p-2 border bg-black"
                   value={selectedShape.material}
                   onChange={handleShapeMaterialChange}
                 >
-                  <option value="standard">Standard</option>
-                  <option value="physical">Physical</option>
-                  <option value="phong">Phong</option>
-                  <option value="basic">Basic</option>
-                  <option value="lambert">Lambert</option>
-                  <option value="normal">Normal</option>
-                  <option value="toon">Toon</option>
+                  <option value="phong">Shiny</option>
+                  <option value="lambert">Smooth</option>
+                  <option value="toon">Cartoon</option>
                 </select>
               </div>
               

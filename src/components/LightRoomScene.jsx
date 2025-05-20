@@ -65,19 +65,8 @@ export default function LightRoomScene() {
 
     return (
         <div className="h-screen w-full flex flex-row">
-            {/* 3D Canvas */}
-            <div className="flex-1 h-full">
-                <Canvas shadows camera={{ position: [8, 8, 8], fov: 50 }}>
-                    <Scene
-                        shapes={shapes}
-                        lightSettings={lightSettings}
-                        environmentSettings={environmentSettings}
-                    />
-                </Canvas>
-            </div>
-
             {/* Control Panel */}
-            <div className="w-64 h-full flex-shrink-0">
+            <div className="w-128 h-full flex-shrink-0">
                 <ControlPanel
                     shapes={shapes}
                     addShape={addShape}
@@ -89,6 +78,18 @@ export default function LightRoomScene() {
                     updateEnvironment={updateEnvironment}
                 />
             </div>
+
+            {/* 3D Canvas */}
+            <div className="flex-1 h-full">
+                <Canvas shadows camera={{ position: [8, 8, 8], fov: 50 }}>
+                    <Scene
+                        shapes={shapes}
+                        lightSettings={lightSettings}
+                        environmentSettings={environmentSettings}
+                    />
+                </Canvas>
+            </div>
+
         </div>
     );
 }
