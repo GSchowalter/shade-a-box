@@ -1,10 +1,22 @@
-import ShadeBox from "@/components/ShadeBox";
-import { Canvas } from '@react-three/fiber';
+
+// File: app/page.js
+"use client";
+
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+
+// Dynamically import the Canvas component to avoid SSR issues
+const LightRoomScene = dynamic(() => import('../components/LightRoomScene'), {
+  ssr: false,
+  loading: () => <div className="w-full h-screen flex items-center justify-center">Loading 3D Scene...</div>
+});
+
 export default function Home() {
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-5xl">Augie's toy box</h1>
-      <ShadeBox />
-    </div>
+    <main className="min-h-screen w-full">
+      <Suspense fallback={<div className="w-full h-screen flex items-center justify-center">Loading 3D Scene...</div>}>
+        <LightRoomScene />
+      </Suspense>
+    </main>
   );
 }
