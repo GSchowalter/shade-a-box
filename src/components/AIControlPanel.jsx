@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function ControlPanel({ 
+export default function AIControlPanel({ 
   shapes, 
   addShape, 
   updateShape, 

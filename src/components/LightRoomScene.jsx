@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, ContactShadows, Environment, useHelper } from '@react-three/drei';
 import { PointLightHelper, DirectionalLightHelper } from 'three';
-import ControlPanel from './ControlPanel';
+import ControlPanel from './AIControlPanel';
 import Shape from './Shape';
 
 export default function LightRoomScene() {
@@ -67,7 +67,7 @@ export default function LightRoomScene() {
     <div className="w-full h-[600px] flex flex-row">
       {/* Control Panel */}
       <div className="w-80 h-full flex-shrink-0 border-l border-gray-200">
-        <ControlPanel 
+        <AIControlPanel 
           shapes={shapes}
           addShape={addShape}
           updateShape={updateShape}
@@ -82,7 +82,7 @@ export default function LightRoomScene() {
       {/* 3D Canvas */}
       <div className="flex-1 h-full">
         <Canvas shadows camera={{ position: [8, 8, 8], fov: 50 }}>
-          <Scene 
+          <AIScene 
             shapes={shapes} 
             lightSettings={lightSettings} 
             environmentSettings={environmentSettings}
@@ -94,7 +94,7 @@ export default function LightRoomScene() {
 }
 
 // Scene component containing all 3D elements
-function Scene({ shapes, lightSettings, environmentSettings }) {
+function AIScene({ shapes, lightSettings, environmentSettings }) {
   const pointLightRef = useRef();
   const directionalLightRef = useRef();
   
@@ -152,7 +152,7 @@ function Scene({ shapes, lightSettings, environmentSettings }) {
       <gridHelper args={[10, 10]} position={[0, -0.01, 0]} />
       
       {/* Ground plane with contact shadows */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.025, 0]} receiveShadow>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]} receiveShadow>
         <planeGeometry args={[50, 50]} />
         <shadowMaterial opacity={0.2} />
       </mesh>

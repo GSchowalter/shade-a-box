@@ -1,5 +1,6 @@
 "use client";
 
+
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
@@ -9,10 +10,15 @@ const LightRoomScene = dynamic(() => import('../components/LightRoomScene'), {
   loading: () => <div className="w-full h-[600px] flex items-center justify-center">Loading 3D Scene...</div>
 });
 
+const  ShadeBoxApp = dynamic(() => import('@/components/ShadeBoxApp'), {
+  ssr: false,
+  loading: () => <div className="w-full h-[600px] flex items-center justify-center">Loading 3D Scene...</div>
+});
+
 export default function Home() {
   return (
     <main className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">3D Light Room Experiment</h1>
+      <h1 className="text-3xl font-bold mb-6">Shade a box</h1>
       
       <p className="mb-6">
         This interactive 3D light room allows you to experiment with different shapes, 
@@ -23,7 +29,9 @@ export default function Home() {
       {/* Light Room Component */}
       <div className="mb-10 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
         <Suspense fallback={<div className="w-full h-[600px] flex items-center justify-center">Loading 3D Scene...</div>}>
-          <LightRoomScene />
+          {/* AI generated try */}
+          {/* <LightRoomScene /> */}
+          <ShadeBoxApp />
         </Suspense>
       </div>
       
