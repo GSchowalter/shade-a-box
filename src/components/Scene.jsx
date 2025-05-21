@@ -1,8 +1,9 @@
 import { useState, useRef } from 'react';
 import { OrbitControls, ContactShadows, Environment, useHelper, Plane, Box } from '@react-three/drei';
 import { PointLightHelper, DirectionalLightHelper } from 'three';
+import Shape from './Shape';
 
-export default function Scene() {
+export default function Scene({ shapes }) {
     const pointLightRef = useRef();
 
     // Add helpers for the lights in development
@@ -43,10 +44,11 @@ export default function Scene() {
                 <meshStandardMaterial color={0xffffff} />
             </Plane>
 
-            {/* Box */}
-            <Box castShadow={true}>
-                <meshStandardMaterial color='gray' />
-            </Box>
+
+            {/* Render all shapes */}
+            {shapes.map((shape) => (
+                <Shape key={shape.id} {...shape} />
+            ))}
         </>
     )
 }
