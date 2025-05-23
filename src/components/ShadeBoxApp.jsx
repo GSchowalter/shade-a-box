@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Scene from './Scene';
 import ControlPanel from './ControlPanel';
@@ -12,19 +12,22 @@ export default function ShadeBoxApp() {
     const [shapes, setShapes] = useState([
         { id: 1, type: 'box', position: [0, 0, 0], material: 'standard', color: '#ffffff' },
     ]);
+    const [lightHelperActive, setLightHelperActive] = useState(false);
+    const pointLightRef = useRef();
+    const [orbitControlsActive, setOrbitControlsActive] = useState(false);
 
     return (
-        <div className="w-full h-[700px] flex flex-col">
+        <div className="w-full h-[700px] flex flex-col items-center justify-center">
             {/* 3D Canvas */}
             <div className="w-full h-9/10">
                 <Canvas shadows camera={{ position: [8, 8, 8], fov: 50 }}>
-                    <Scene shapes={shapes} />
+                    <Scene shapes={shapes} lightHelperActive={lightHelperActive} pointLightRef={pointLightRef} orbitControlsActive={orbitControlsActive}/>
                 </Canvas>
             </div>
 
             {/* Control Panel */}
-            <div className='w-full h-1/10'>
-                <ControlPanel setShapes={setShapes}/>
+            <div className='h-1/10 w-full align'>
+                <ControlPanel setShapes={setShapes} setLightHelperActive={setLightHelperActive} lightHelperActive={lightHelperActive} setOrbitControlsActive={setOrbitControlsActive} orbitControlsActive={orbitControlsActive}/>
             </div>
         </div>
     );
