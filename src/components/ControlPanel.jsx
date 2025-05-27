@@ -1,25 +1,26 @@
-import { generateRandomShapeName, generateRandomShapePosition, generateRandomShapeRotation, shapeList } from '@/utils/shapeUtils';
+import { generateRandomShapePropertyFromList, generateRandomShapePosition, generateRandomShapeRotation, shapeList, shapeMaterialsList } from '@/utils/shapeUtils';
 import { generateRandomLightPosition } from '@/utils/lightUtils';
 import { FormControl, InputLabel, Select, MenuItem, Checkbox, ListItemText, FormControlLabel, Switch, Button, Slider } from '@mui/material';
 import { useState } from 'react';
 import PopUp from './ui_components/PopUp';
 
-export default function ControlPanel({ setShapes, shapeTypes, setShapeTypes, lightSettings, setLightSettings, setLightHelperActive, lightHelperActive, setOrbitControlsActive, orbitControlsActive }) {
+export default function ControlPanel({ setShapes, shapeTypes, setShapeTypes, shapeMaterials, setShapeMaterials, lightSettings, setLightSettings, setLightHelperActive, lightHelperActive, setOrbitControlsActive, orbitControlsActive }) {
 
     const [shapeCount, setShapeCount] = useState(1);
 
     const initializeShapes = () => {
         let shapes = []
         for (let i = 0; i < shapeCount; i++) {
-            const randomShapeName = generateRandomShapeName(shapeTypes);
+            const randomShapeName = generateRandomShapePropertyFromList(shapeTypes);
             const randomShapePosition = generateRandomShapePosition();
             const randomShapeRotation = generateRandomShapeRotation();
+            const randomShapeMaterial = generateRandomShapePropertyFromList(shapeMaterials);
             const shape = {
                 id: i,
                 type: randomShapeName,
                 position: randomShapePosition,
                 rotation: randomShapeRotation,
-                material: 'standard',
+                material: randomShapeMaterial,
                 color: '#ffffff'
             }
             shapes.push(shape)
@@ -84,6 +85,15 @@ export default function ControlPanel({ setShapes, shapeTypes, setShapeTypes, lig
             setShapeTypes(prev => prev.filter(item => item !== shape));
         }
     }
+
+    const handleShapeMaterialsChange = (event, material) => {
+        if (event.target.checked) {
+            setShapeMaterials(prev => [...prev, material]);
+        } else {
+            setShapeMaterials(prev => prev.filter(item => item !== material));
+        }
+    }
+
     return (
         <div className='flex flex-row justify-evenly h-full items-center text-white p-4 '>
             <p id='shapes' className=''>Number of shapes:
@@ -115,8 +125,22 @@ export default function ControlPanel({ setShapes, shapeTypes, setShapeTypes, lig
                         />
                     ))}
                 </FormControl>
-                <p>Shape Materials:</p>
-                
+                {/* <p>Shape Materials:</p>
+                <FormControl>
+                    {shapeMaterialsList.map((material, index) => (
+                        <FormControlLabel
+                            key={index}
+                            control={
+                                <Checkbox
+                                    checked={shapeMaterials.includes(material)}
+                                    onChange={(event) => handleShapeMaterialsChange(event, material)}
+                                />
+                            }
+                            label={material}
+                        />
+                    ))}
+                </FormControl> */}
+
             </PopUp>
 
             <PopUp className='' title="Light Controls">

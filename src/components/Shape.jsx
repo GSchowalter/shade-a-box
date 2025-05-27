@@ -32,6 +32,8 @@ export default function Shape({ id, type, position, rotation, material, color })
     switch (material) {
       case 'standard':
         return <meshStandardMaterial {...props} roughness={0.7} metalness={0.1} />;
+      case 'metallic':
+        return <meshStandardMaterial {...props} roughness={0.2} metalness={1}/>;
       case 'physical':
         return <meshPhysicalMaterial {...props} roughness={0.4} metalness={0.8} clearcoat={0.5} />;
       case 'phong':

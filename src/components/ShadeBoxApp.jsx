@@ -15,7 +15,7 @@ export default function ShadeBoxApp() {
     const randomShapeRotation = generateRandomShapeRotation();
     const shape = {
         id: 1,
-        type: 'sphere',
+        type: 'box',
         position: randomShapePosition,
         rotation: randomShapeRotation,
         material: 'standard',
@@ -25,6 +25,7 @@ export default function ShadeBoxApp() {
         shape
     ]);
     const [shapeTypes, setShapeTypes] = useState(['sphere', 'box', 'cylinder', 'cone', 'torus']);
+    const [shapeMaterials, setShapeMaterials] = useState(['standard']);
 
     const [lightSettings, setLightSettings] = useState({
         position: generateRandomLightPosition(),
@@ -52,7 +53,7 @@ export default function ShadeBoxApp() {
 
             {/* Control Panel */}
             <div className='h-1/10 w-full align'>
-                <ControlPanel setShapes={setShapes} shapeTypes={shapeTypes} setShapeTypes={setShapeTypes} lightSettings={lightSettings} setLightSettings={setLightSettings} setLightHelperActive={setLightHelperActive} lightHelperActive={lightHelperActive} setOrbitControlsActive={setOrbitControlsActive} orbitControlsActive={orbitControlsActive} />
+                <ControlPanel setShapes={setShapes} setShapeMaterials={setShapeMaterials} shapeMaterials={shapeMaterials} shapeTypes={shapeTypes} setShapeTypes={setShapeTypes} lightSettings={lightSettings} setLightSettings={setLightSettings} setLightHelperActive={setLightHelperActive} lightHelperActive={lightHelperActive} setOrbitControlsActive={setOrbitControlsActive} orbitControlsActive={orbitControlsActive} />
             </div>
         </div>
     );

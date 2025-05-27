@@ -9,7 +9,13 @@ const shapeList = [
     'pyramid'
 ]
 
-function generateRandomShapeName(shapes) {
+const shapeMaterialsList = [
+    'standard',
+    'toon',
+    'metalic'
+]
+
+function generateRandomShapePropertyFromList(shapes) {
     const random = Math.floor(Math.random() * shapes.length);
     return shapes[random]
 }
@@ -43,4 +49,4 @@ function generateRandomShapeRotation() {
     return randomRotation;
 }
 
-export { shapeList, generateRandomShapeName, generateRandomShapePosition, generateRandomShapeRotation }
+export { shapeList, shapeMaterialsList, generateRandomShapePropertyFromList, generateRandomShapePosition, generateRandomShapeRotation }
