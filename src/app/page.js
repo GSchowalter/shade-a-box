@@ -70,11 +70,7 @@ export default function Home() {
           </li>
       </ul>
 
-      <h2 className="text-2xl font-bold mb-4">Thank you for visiting!</h2>
-      <p className="mb-6">
-
-      </p>
-      <div className="h-20"></div> {/* Extra space at bottom for scrolling */}
+      <h2 className="text-l font-bold mb-4 pt-4">Thank you for visiting!</h2>
     </main>
   );
 }

@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
 
 const geistSans = Geist({
@@ -26,6 +27,20 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Analytics />
+        <footer className="text-center text-sm text-gray-500 mt-8">
+          <p>
+            Made with ❤️ by{" "}
+            <a
+              href="https://gschowalter.github.io/"
+              className="underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Grant Schowalter
+            </a>
+          </p>
+        </footer>
       </body>
     </html>
   );
