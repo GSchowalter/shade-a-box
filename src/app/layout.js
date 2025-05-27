@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Shade a Box",
+  title: "Valshape",
   description: "App used to help artists study the values of basic forms.",
   icons: {
     icon: "/favicon.svg"
