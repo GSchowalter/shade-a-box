@@ -15,8 +15,8 @@ export default function Home() {
 
       <p className="mb-6">
         Welcome to Shade a Box! A 3D web app designed to help artists study the value of basic forms. Bust out and pen, pencil, tablet, stick, or anything that can make a mark and start shading!
-        Each scene is contains a specified amount of shapes at random positions. The lighting position is also random. Use the "REDRAW" button to generate a new scene. 
-        You can use the control panel below the scene to customize the number and kind of shapes in the scene. If the camera angle isn't working for you try the orbit controls under "Advanced Settings".
+        For now, this app is best used on a large landscape screen, like a laptop or desktop. Each scene is contains a specified amount of shapes at random positions. The lighting position is also random. Use the &quot;REDRAW&quot; button to generate a new scene. 
+        You can use the control panel below the scene to customize the number and kind of shapes in the scene. If the camera angle isn&apos;t working for you try the orbit controls under &quot;Advanced Settings&quot;.
         The light controls are useful for scenes where the light may be in a wierd spot or if you specifically want to study dim light scenes.
       </p>
 
@@ -29,7 +29,7 @@ export default function Home() {
 
       <h2 className="text-2xl font-bold mb-4">Support The Project</h2>
       <p className="mb-6">
-        This is a solo project so if you get a lot out of it I would appreciate some support so I know to keep working on it. If you'd like to support the project, you can do so by sharing it with others, providing feedback 📩. You can also donate below. Every bit helps😁!
+        This is a solo project so if you get a lot out of it I would appreciate some support so I know to keep working on it. If you&apos;d like to support the project, you can do so by sharing it with others, providing feedback 📩. You can also donate below. Every bit helps😁!
       </p>
       <a href="https://www.buymeacoffee.com/GSchowalter"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=GSchowalter&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
       <br />
@@ -38,7 +38,7 @@ export default function Home() {
         I built this tool mainly for myself and thought others would benefit as well. I believe studying simple forms like these is a great way to work towards mastery.
         Improving your understanding of light and shadow starts by building a rock solid foundation with basic forms. Use this tool to lay the bricks that your sky scrapper will one day stand on. Or just to stay fresh. <br /> <br />
         This project is directly inspired by <Link className="underline" href="https://www.drawabox.com" >The Draw A Box Cource by Uncomfortable</Link>.
-        For those of you who are looking to improve your spacial reasoning skills I can't recommend this course enough. It's completely free with the option to pay for professional critique.
+        For those of you who are looking to improve your spacial reasoning skills I can&apos;t recommend this course enough. It&apos;s completely free with the option to pay for professional critique.
       </p>
 
       <h2 className="text-2xl font-bold mb-4">Beta disclaimer</h2>
@@ -51,7 +51,7 @@ export default function Home() {
           - Mobile view works but is not pretty and shapes may be rendered outside the viewing window.
         </li>
         <li className="mb-2">
-          - Shapes may render inside eachother (not sure if this is a bug or feature though. I think it's cool 😎)
+          - Shapes may render inside eachother (not sure if this is a bug or feature though. I think it&apos;s cool 😎)
         </li>
       </ul>
       <ul>
