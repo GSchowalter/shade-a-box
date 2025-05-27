@@ -51,7 +51,7 @@ export default function ShadeBoxApp() {
 
             {/* Control Panel */}
             <div className='h-1/10 w-full align'>
-                <ControlPanel setShapes={setShapes} setLightSettings={setLightSettings} setLightHelperActive={setLightHelperActive} lightHelperActive={lightHelperActive} setOrbitControlsActive={setOrbitControlsActive} orbitControlsActive={orbitControlsActive} />
+                <ControlPanel setShapes={setShapes} lightSettings={lightSettings} setLightSettings={setLightSettings} setLightHelperActive={setLightHelperActive} lightHelperActive={lightHelperActive} setOrbitControlsActive={setOrbitControlsActive} orbitControlsActive={orbitControlsActive} />
             </div>
         </div>
     );

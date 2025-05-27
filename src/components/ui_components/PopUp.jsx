@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 
-export default function PopUp({ children }) {
+export default function PopUp({ title,children }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const togglePopUp = () => {
@@ -12,17 +12,17 @@ export default function PopUp({ children }) {
   return (
     <div>
       <Popup trigger=
-        {<Button variant="contained"> Advanced Settings </Button>}
+        {<Button className="h1" variant="contained"> {title} </Button>}
         modal nested>
         {
           close => (
-            <div className='flex flex-col bg-black p-4'>
+            <div className='flex flex-col bg-black p-4 justify-evenly'>
               <div className='content'>
-                Advanced Settings
+                {title}
               </div>
               {children}
-              <div>
-                <Button onClick=
+              <div className="pt-3">
+                <Button  onClick=
                   {() => close()} variant="contained">
                   Close modal
                 </Button>

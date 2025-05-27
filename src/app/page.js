@@ -2,12 +2,6 @@
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
-// Dynamically import the Canvas component to avoid SSR issues
-const LightRoomScene = dynamic(() => import('../components/LightRoomScene'), {
-  ssr: false,
-  loading: () => <div className="w-full h-[600px] flex items-center justify-center">Loading 3D Scene...</div>
-});
-
 const  ShadeBoxApp = dynamic(() => import('@/components/ShadeBoxApp'), {
   ssr: false,
   loading: () => <div className="w-full h-[600px] flex items-center justify-center">Loading 3D Scene...</div>
@@ -27,8 +21,6 @@ export default function Home() {
       {/* Light Room Component */}
       <div className="mb-10 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
         <Suspense fallback={<div className="w-full h-[600px] flex items-center justify-center">Loading 3D Scene...</div>}>
-          {/* AI generated try */}
-          {/* <LightRoomScene /> */}
           <ShadeBoxApp />
         </Suspense>
       </div>

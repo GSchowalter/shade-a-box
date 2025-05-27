@@ -3,11 +3,11 @@ function generateRandomLightPosition() {
     const x_max = 5;
     const x_min = -5;
     
-    const y_max = 12;
+    const y_max = 15;
     const y_min = 0;
 
-    const z_max = 12;
-    const z_min = -4;
+    const z_max = 15;
+    const z_min = -5;
 
     const x = Math.floor(Math.random() * (x_max - x_min + 1)) + x_min
     const y = Math.floor(Math.random() * (y_max - y_min + 1)) + y_min

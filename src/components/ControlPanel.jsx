@@ -3,12 +3,10 @@ import { generateRandomLightPosition } from '@/utils/lightUtils';
 import { FormControlLabel, Switch, Button } from '@mui/material';
 import { useState } from 'react';
 import PopUp from './ui_components/PopUp';
-import { useThree } from '@react-three/fiber'
 
-export default function ControlPanel({ setShapes, setLightSettings, setLightHelperActive, lightHelperActive, setOrbitControlsActive, orbitControlsActive, cameraPosition, setCameraPosition }) {
+export default function ControlPanel({ setShapes, lightSettings, setLightSettings, setLightHelperActive, lightHelperActive, setOrbitControlsActive, orbitControlsActive }) {
 
     const [shapeCount, setShapeCount] = useState(1);
-    // const camera = useThree(state => state.camera);
 
     const initializeShapes = () => {
         let shapes = []
@@ -16,13 +14,13 @@ export default function ControlPanel({ setShapes, setLightSettings, setLightHelp
             const randomShapeName = generateRandomShapeName();
             const randomShapePosition = generateRandomShapePosition();
             const randomShapeRotation = generateRandomShapeRotation();
-            const shape = { 
-                id: i, 
-                type: randomShapeName, 
-                position: randomShapePosition, 
-                rotation: randomShapeRotation, 
-                material: 'standard', 
-                color: '#ffffff' 
+            const shape = {
+                id: i,
+                type: randomShapeName,
+                position: randomShapePosition,
+                rotation: randomShapeRotation,
+                material: 'standard',
+                color: '#ffffff'
             }
             shapes.push(shape)
             // console.log(`Shape pushed: ${shape.type} at ${shape.position} with rotation ${shape.rotation}`)
@@ -57,44 +55,27 @@ export default function ControlPanel({ setShapes, setLightSettings, setLightHelp
         }
     }
 
-    const cameraForward = () => {
-        camera.position.set(0, 2, 9);
-        camera.rotation.set(0, 0, 0);
-        camera.updateProjectionMatrix();
+    const lightUp = () => {
+        setLightSettings(prev => ({ ...prev, position: [prev.position[0], prev.position[1] + 1, prev.position[2]] }));
     }
-
-    const cameraBackward = () => {
-        camera.position.set(0, 2, -9);
-        camera.rotation.set(0, 0, 0);
-        camera.updateProjectionMatrix();
+    const lightDown = () => {
+        setLightSettings(prev => ({ ...prev, position: [prev.position[0], prev.position[1] - 1, prev.position[2]] }));
     }
-
-    const cameraLeft = () => {
-        camera.position.set(-9, 2, 0);
-        camera.rotation.set(0, 0, 0);
-        camera.updateProjectionMatrix();
+    const lightLeft = () => {
+        setLightSettings(prev => ({ ...prev, position: [prev.position[0] - 1, prev.position[1], prev.position[2]] }));
     }
-
-    const cameraRight = () => {
-        camera.position.set(9, 2, 0);
-        camera.rotation.set(0, 0, 0);
-        camera.updateProjectionMatrix();
+    const lightRight = () => {
+        setLightSettings(prev => ({ ...prev, position: [prev.position[0] + 1, prev.position[1], prev.position[2]] }));
     }
-
-    const cameraUp = () => {
-        camera.position.set(0, 9, 0);
-        camera.rotation.set(0, 0, 0);
-        camera.updateProjectionMatrix();
+    const lightForward = () => {
+        setLightSettings(prev => ({ ...prev, position: [prev.position[0], prev.position[1], prev.position[2] - 1] }));
     }
-
-    const cameraDown = () => {
-        camera.position.set(0, -9, 0);
-        camera.rotation.set(0, 0, 0);
-        camera.updateProjectionMatrix();
+    const lightBackward = () => {
+        setLightSettings(prev => ({ ...prev, position: [prev.position[0], prev.position[1], prev.position[2] + 1] }));
     }
 
     return (
-        <div className='flex flex-row justify-evenly'>
+        <div className='flex flex-row justify-evenly h-full items-center text-white p-4 '>
             <p id='shapes' className=''>Number of shapes:
                 <input className='border'
                     type='number'
@@ -106,23 +87,28 @@ export default function ControlPanel({ setShapes, setLightSettings, setLightHelp
                 />
             </p>
 
-            <Button className='' onClick={reDrawScene} variant="contained">redraw </Button>
-            <PopUp className='p-5'>
-                <FormControlLabel className='' control={<Switch color='default' onChange={handleLightHelperChange} checked={lightHelperActive} />} label="light position indicator" />
-                <FormControlLabel className='' control={<Switch color='default' onChange={handleOrbitControlsChange} checked={orbitControlsActive} />} label="orbit controls" />
-                <FormControlLabel className='' control={<Switch color='default' checked={false} />} label="floating shapes" />
+            <Button className='' onClick={reDrawScene} variant="contained">redraw</Button>
+
+            <PopUp className='' title="Light Controls">
+                <p>Position:</p>
+                <div className="flex flex-col items-center space-y-2 justify-center p-1">
+                    <Button onClick={lightUp} variant="outlined">↑</Button>
+                </div>
+                <div className="flex flex-row space-x-2 justify-center p-1">
+                    <Button onClick={lightLeft} variant="outlined">←</Button>
+                    <Button onClick={lightDown} variant="outlined">↓</Button>
+                    <Button onClick={lightRight} variant="outlined">→</Button>
+                </div>
+                <div className="flex flex-row space-x-2 justify-evenly p-1">
+                    <Button onClick={lightForward} variant="outlined">Forward</Button>
+                    <Button onClick={lightBackward} variant="outlined">Backward</Button>
+                </div>
             </PopUp>
-            <div>
-                <Button onClick={cameraForward} variant="outlined">Camera Forward</Button>
-                <Button onClick={cameraBackward} variant="outlined">Camera Backward</Button>
-                <Button onClick={cameraLeft} variant="outlined">Camera Left</Button>
-                <Button onClick={cameraRight} variant="outlined">Camera Right</Button>
-                <Button onClick={cameraUp} variant="outlined">Camera Up</Button>
-                <Button onClick={cameraDown} variant="outlined">Camera Down</Button>
-            </div>
-            <div>
-                <p> Camera Position {JSON.stringify(cameraPosition)} </p>
-            </div>
+
+            <PopUp className='' title="Advanced Settings">
+                <FormControlLabel className='' control={<Switch onChange={handleLightHelperChange} checked={lightHelperActive} />} label="light position indicator" />
+                <FormControlLabel className='' control={<Switch onChange={handleOrbitControlsChange} checked={orbitControlsActive} />} label="orbit controls" />
+            </PopUp>
         </div>
     )
 }
