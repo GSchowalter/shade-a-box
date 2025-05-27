@@ -4,12 +4,14 @@ const shapeList = [
     'sphere',
     'cylinder',
     'cone',
-    'torus'
+    'torus',
+    'dodecahedron',
+    'pyramid'
 ]
 
-function generateRandomShapeName() {
-    const random = Math.floor(Math.random() * shapeList.length);
-    return shapeList[random]
+function generateRandomShapeName(shapes) {
+    const random = Math.floor(Math.random() * shapes.length);
+    return shapes[random]
 }
 
 function generateRandomShapePosition() {
@@ -28,8 +30,6 @@ function generateRandomShapePosition() {
     return randomPosition;
 }
 
-import { Euler } from 'three';
-
 function generateRandomShapeRotation() {
     const max = Math.PI;
     const min = -Math.PI;
@@ -43,4 +43,4 @@ function generateRandomShapeRotation() {
     return randomRotation;
 }
 
-export { generateRandomShapeName, generateRandomShapePosition, generateRandomShapeRotation }
+export { shapeList, generateRandomShapeName, generateRandomShapePosition, generateRandomShapeRotation }

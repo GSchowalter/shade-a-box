@@ -16,6 +16,10 @@ export default function Shape({ id, type, position, rotation, material, color })
         return <coneGeometry args={[0.6, 1.5, 32]} />;
       case 'torus':
         return <torusGeometry args={[0.5, 0.2, 16, 32]} />;
+      case 'dodecahedron':
+        return <dodecahedronGeometry args={[0.5, 0]} />;
+      case 'pyramid':
+        return <tetrahedronGeometry args={[0.5, 0]} />;
       default:
         return <boxGeometry args={[1, 1, 1]} />;
     }

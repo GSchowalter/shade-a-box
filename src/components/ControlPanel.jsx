@@ -1,17 +1,17 @@
-import { generateRandomShapeName, generateRandomShapePosition, generateRandomShapeRotation } from '@/utils/shapeUtils';
+import { generateRandomShapeName, generateRandomShapePosition, generateRandomShapeRotation, shapeList } from '@/utils/shapeUtils';
 import { generateRandomLightPosition } from '@/utils/lightUtils';
-import { FormControlLabel, Switch, Button, Slider } from '@mui/material';
+import { FormControl, InputLabel, Select, MenuItem, Checkbox, ListItemText, FormControlLabel, Switch, Button, Slider } from '@mui/material';
 import { useState } from 'react';
 import PopUp from './ui_components/PopUp';
 
-export default function ControlPanel({ setShapes, lightSettings, setLightSettings, setLightHelperActive, lightHelperActive, setOrbitControlsActive, orbitControlsActive }) {
+export default function ControlPanel({ setShapes, shapeTypes, setShapeTypes, lightSettings, setLightSettings, setLightHelperActive, lightHelperActive, setOrbitControlsActive, orbitControlsActive }) {
 
     const [shapeCount, setShapeCount] = useState(1);
 
     const initializeShapes = () => {
         let shapes = []
         for (let i = 0; i < shapeCount; i++) {
-            const randomShapeName = generateRandomShapeName();
+            const randomShapeName = generateRandomShapeName(shapeTypes);
             const randomShapePosition = generateRandomShapePosition();
             const randomShapeRotation = generateRandomShapeRotation();
             const shape = {
@@ -77,6 +77,13 @@ export default function ControlPanel({ setShapes, lightSettings, setLightSetting
         setLightSettings(prev => ({ ...prev, intensity: newValue }));
     }
 
+    const handleShapeTypesChange = (event, shape) => {
+        if (event.target.checked) {
+            setShapeTypes(prev => [...prev, shape]);
+        } else {
+            setShapeTypes(prev => prev.filter(item => item !== shape));
+        }
+    }
     return (
         <div className='flex flex-row justify-evenly h-full items-center text-white p-4 '>
             <p id='shapes' className=''>Number of shapes:
@@ -91,6 +98,26 @@ export default function ControlPanel({ setShapes, lightSettings, setLightSetting
             </p>
 
             <Button className='' onClick={reDrawScene} variant="contained">redraw</Button>
+
+            <PopUp title="Shape settings">
+                <p>Shape types:</p>
+                <FormControl>
+                    {shapeList.map((shape, index) => (
+                        <FormControlLabel
+                            key={index}
+                            control={
+                                <Checkbox
+                                    checked={shapeTypes.includes(shape)}
+                                    onChange={(event) => handleShapeTypesChange(event, shape)}
+                                />
+                            }
+                            label={shape}
+                        />
+                    ))}
+                </FormControl>
+                <p>Shape Materials:</p>
+                
+            </PopUp>
 
             <PopUp className='' title="Light Controls">
                 <p>Position:</p>
