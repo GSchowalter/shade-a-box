@@ -1,8 +1,9 @@
 "use client";
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
+import Link from 'next/link';
 
-const  ShadeBoxApp = dynamic(() => import('@/components/ShadeBoxApp'), {
+const ShadeBoxApp = dynamic(() => import('@/components/ShadeBoxApp'), {
   ssr: false,
   loading: () => <div className="w-full h-[600px] flex items-center justify-center">Loading 3D Scene...</div>
 });
@@ -10,37 +11,69 @@ const  ShadeBoxApp = dynamic(() => import('@/components/ShadeBoxApp'), {
 export default function Home() {
   return (
     <main className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Shade a box</h1>
-      
+      <h1 className="text-3xl font-bold mb-6">Shade a Box📦</h1>
+
       <p className="mb-6">
-        This interactive 3D light room allows you to experiment with different shapes, 
-        materials, and lighting conditions. Use the control panel on the right to add shapes,
-        adjust lighting, and change the environment.
+        Welcome to Shade a Box! A 3D web app designed to help artists study the value of basic forms. Bust out and pen, pencil, tablet, stick, or anything that can make a mark and start shading!
+        Each scene is contains a specified amount of shapes at random positions. The lighting position is also random. Use the "REDRAW" button to generate a new scene. 
+        You can use the control panel below the scene to customize the number and kind of shapes in the scene. If the camera angle isn't working for you try the orbit controls under "Advanced Settings".
+        The light controls are useful for scenes where the light may be in a wierd spot or if you specifically want to study dim light scenes.
       </p>
-      
+
       {/* Light Room Component */}
       <div className="mb-10 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
         <Suspense fallback={<div className="w-full h-[600px] flex items-center justify-center">Loading 3D Scene...</div>}>
           <ShadeBoxApp />
         </Suspense>
       </div>
-      
+
+      <h2 className="text-2xl font-bold mb-4">Support The Project</h2>
+      <p className="mb-6">
+        This is a solo project so if you get a lot out of it I would appreciate some support so I know to keep working on it. If you'd like to support the project, you can do so by sharing it with others, providing feedback 📩. You can also donate below. Every bit helps😁!
+      </p>
+      <a href="https://www.buymeacoffee.com/GSchowalter"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=GSchowalter&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
+      <br />
       <h2 className="text-2xl font-bold mb-4">About This Project</h2>
       <p className="mb-6">
-        This project demonstrates the capabilities of React Three Fiber for creating 
-        interactive 3D experiences on the web. You can use it to understand how different 
-        materials react to various lighting conditions.
+        I built this tool mainly for myself and thought others would benefit as well. I believe studying simple forms like these is a great way to work towards mastery.
+        Improving your understanding of light and shadow starts by building a rock solid foundation with basic forms. Use this tool to lay the bricks that your sky scrapper will one day stand on. Or just to stay fresh. <br /> <br />
+        This project is directly inspired by <Link className="underline" href="https://www.drawabox.com" >The Draw A Box Cource by Uncomfortable</Link>.
+        For those of you who are looking to improve your spacial reasoning skills I can't recommend this course enough. It's completely free with the option to pay for professional critique.
       </p>
-      
-      <h2 className="text-2xl font-bold mb-4">How To Use</h2>
-      <ul className="list-disc pl-6 mb-6">
-        <li className="mb-2">Add shapes using the buttons in the control panel</li>
-        <li className="mb-2">Select a shape to modify its material and color</li>
-        <li className="mb-2">Adjust lighting position, intensity, and color</li>
-        <li className="mb-2">Experiment with different environment presets</li>
-        <li className="mb-2">Click and drag in the scene to orbit the camera</li>
+
+      <h2 className="text-2xl font-bold mb-4">Beta disclaimer</h2>
+      <p className="mb-6">
+        This application is currently in beta. If you have feedback you can email me or contact me through the draw a box discord. My username there is CoatBoat. My email can be found on my personal site <Link className="underline" href="https://gschowalter.github.io/">here</Link>.
+      </p>
+      <ul>
+        <p className='font-bold'>Known issues:</p>
+        <li className="mb-2">
+          - Mobile view works but is not pretty and shapes may be rendered outside the viewing window.
+        </li>
+        <li className="mb-2">
+          - Shapes may render inside eachother (not sure if this is a bug or feature though. I think it's cool 😎)
+        </li>
       </ul>
-      
+      <ul>
+        <p className='font-bold'>Features in the works:</p>
+        <li className="mb-2">
+          - Different materials for shapes (metalic, cartoon, etc.)
+        </li>
+        <li className="mb-2">
+          - Procedurally generated 3D blobs to help study more organic forms.
+        </li>
+        <li className="mb-2">
+          - More shapes (dodecahedron, pyramid, etc.)
+        </li>
+        <li className="mb-2">
+          - Timed study sessions. Adding a timer and switching scenes automatically. 
+          </li>
+      </ul>
+
+      <h2 className="text-2xl font-bold mb-4">Thank you for visiting!</h2>
+      <p className="mb-6">
+
+      </p>
       <div className="h-20"></div> {/* Extra space at bottom for scrolling */}
     </main>
   );
