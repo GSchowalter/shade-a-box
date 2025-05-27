@@ -4,26 +4,14 @@ import { OrbitControls, ContactShadows, Environment, useHelper, Plane, Box } fro
 import { PointLightHelper, DirectionalLightHelper, MathUtils } from 'three';
 import Shape from './Shape';
 
-export default function Scene({ shapes, lightHelperActive, pointLightRef, orbitControlsActive, }) {
+export default function Scene({ shapes, lightSettings, lightHelperActive, pointLightRef, orbitControlsActive, }) {
 
     // Add helpers for the lights in development
     useHelper(lightHelperActive ? pointLightRef : null, PointLightHelper);
 
-    const lightSettings = {
-        position: [0, 5, 5],
-        castShadow: true,
-        color: 0xe3e3cf,
-        intensity: 100,
-        shadow: {
-            mapSize: { width: 1024, height: 1024 },
-            radius: 5
-        }
-    }
-
     useThree(({ camera }) => {
-        camera.rotation.set(MathUtils.degToRad(-5), 0, 0);
+        camera.rotation.set(MathUtils.degToRad(0), 0, 0);
         camera.position.set(0, 2, 9)
-
     });
 
     return (
@@ -41,10 +29,11 @@ export default function Scene({ shapes, lightHelperActive, pointLightRef, orbitC
                 castShadow={lightSettings.castShadow}
                 shadow-mapSize={lightSettings.shadow.mapSize.width}
             />
-            <ambientLight intensity={0.15} />
+
+            <ambientLight intensity={0.1} />
 
             {/* Ground plane */}
-            <Plane args={[10, 15]} position={[0, -.5, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow={true} >
+            <Plane args={[10, 12]} position={[0, -.5, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow={true} >
                 <meshStandardMaterial color={0xffffff} />
             </Plane>
             {/* Back wall */}
@@ -63,7 +52,7 @@ export default function Scene({ shapes, lightHelperActive, pointLightRef, orbitC
 
             {/* Render all shapes */}
             {shapes.map((shape) => (
-                <Shape key={shape.id} {...shape} />
+                <Shape key={shape.id} rotation={shape.rotation}{...shape} />
             ))}
         </>
     )

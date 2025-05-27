@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-export default function Shape({ id, type, position, material, color }) {
+export default function Shape({ id, type, position, rotation, material, color }) {
   const meshRef = useRef();
   
   // Define the geometry based on the shape type
@@ -47,8 +47,10 @@ export default function Shape({ id, type, position, material, color }) {
   
   return (
     <mesh
+      key={id}
       ref={meshRef}
       position={position}
+      rotation={rotation}
       castShadow
       receiveShadow
     >

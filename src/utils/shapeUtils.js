@@ -17,7 +17,7 @@ function generateRandomShapePosition() {
     const min = -3;
     
     const y_max = 3;
-    const y_min = 0;
+    const y_min = 0.2;
 
     const randomPosition = [
         Math.floor(Math.random() * (max - min + 1)) + min,
@@ -28,4 +28,19 @@ function generateRandomShapePosition() {
     return randomPosition;
 }
 
-export { generateRandomShapeName, generateRandomShapePosition }
+import { Euler } from 'three';
+
+function generateRandomShapeRotation() {
+    const max = Math.PI;
+    const min = -Math.PI;
+
+    const randomRotation = [
+        Math.random() * (max - min) + min,
+        Math.random() * (max - min) + min,
+        Math.random() * (max - min) + min
+    ];
+
+    return randomRotation;
+}
+
+export { generateRandomShapeName, generateRandomShapePosition, generateRandomShapeRotation }

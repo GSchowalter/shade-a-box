@@ -2,6 +2,8 @@ import { useState, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Scene from './Scene';
 import ControlPanel from './ControlPanel';
+import { generateRandomShapePosition, generateRandomShapeRotation } from '@/utils/shapeUtils';
+import { generateRandomLightPosition } from '@/utils/lightUtils';
 
 export default function ShadeBoxApp() {
     // Main window for app that will contain scenes with shapes and shadows. 
@@ -9,11 +11,33 @@ export default function ShadeBoxApp() {
     // Timed sessions with a review at the end is the stretch goal.
 
     // State for managing shapes in the scene
+    const randomShapePosition = generateRandomShapePosition();
+    const randomShapeRotation = generateRandomShapeRotation();
+    const shape = {
+        id: 1,
+        type: 'sphere',
+        position: randomShapePosition,
+        rotation: randomShapeRotation,
+        material: 'standard',
+        color: '#ffffff'
+    }
     const [shapes, setShapes] = useState([
-        { id: 1, type: 'box', position: [0, 0, 0], material: 'standard', color: '#ffffff' },
+        shape
     ]);
+
+    const [lightSettings, setLightSettings] = useState({
+        position: generateRandomLightPosition(),
+        castShadow: true,
+        color: 0xe3e3cf,
+        intensity: 100,
+        shadow: {
+            mapSize: { width: 2000, height: 2000 },
+            radius: 5
+        }
+    })
     const [lightHelperActive, setLightHelperActive] = useState(false);
     const pointLightRef = useRef();
+
     const [orbitControlsActive, setOrbitControlsActive] = useState(false);
 
     return (
@@ -21,13 +45,13 @@ export default function ShadeBoxApp() {
             {/* 3D Canvas */}
             <div className="w-full h-9/10">
                 <Canvas shadows camera={{ position: [8, 8, 8], fov: 50 }}>
-                    <Scene shapes={shapes} lightHelperActive={lightHelperActive} pointLightRef={pointLightRef} orbitControlsActive={orbitControlsActive}/>
+                    <Scene shapes={shapes} lightSettings={lightSettings} lightHelperActive={lightHelperActive} pointLightRef={pointLightRef} orbitControlsActive={orbitControlsActive} />
                 </Canvas>
             </div>
 
             {/* Control Panel */}
             <div className='h-1/10 w-full align'>
-                <ControlPanel setShapes={setShapes} setLightHelperActive={setLightHelperActive} lightHelperActive={lightHelperActive} setOrbitControlsActive={setOrbitControlsActive} orbitControlsActive={orbitControlsActive}/>
+                <ControlPanel setShapes={setShapes} setLightSettings={setLightSettings} setLightHelperActive={setLightHelperActive} lightHelperActive={lightHelperActive} setOrbitControlsActive={setOrbitControlsActive} orbitControlsActive={orbitControlsActive} />
             </div>
         </div>
     );
