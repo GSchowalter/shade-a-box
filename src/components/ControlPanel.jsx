@@ -1,6 +1,6 @@
 import { generateRandomShapeName, generateRandomShapePosition, generateRandomShapeRotation } from '@/utils/shapeUtils';
 import { generateRandomLightPosition } from '@/utils/lightUtils';
-import { FormControlLabel, Switch, Button } from '@mui/material';
+import { FormControlLabel, Switch, Button, Slider } from '@mui/material';
 import { useState } from 'react';
 import PopUp from './ui_components/PopUp';
 
@@ -73,6 +73,9 @@ export default function ControlPanel({ setShapes, lightSettings, setLightSetting
     const lightBackward = () => {
         setLightSettings(prev => ({ ...prev, position: [prev.position[0], prev.position[1], prev.position[2] + 1] }));
     }
+    const handleLightIntensityChange = (event, newValue) => {
+        setLightSettings(prev => ({ ...prev, intensity: newValue }));
+    }
 
     return (
         <div className='flex flex-row justify-evenly h-full items-center text-white p-4 '>
@@ -103,10 +106,14 @@ export default function ControlPanel({ setShapes, lightSettings, setLightSetting
                     <Button onClick={lightForward} variant="outlined">Forward</Button>
                     <Button onClick={lightBackward} variant="outlined">Backward</Button>
                 </div>
+                <FormControlLabel className='' control={<Switch onChange={handleLightHelperChange} checked={lightHelperActive} />} label="light position indicator" />
+                <div>
+                    <p>Intensity</p>
+                    <Slider value={lightSettings.intensity} max={700} onChange={handleLightIntensityChange} />
+                </div>
             </PopUp>
 
             <PopUp className='' title="Advanced Settings">
-                <FormControlLabel className='' control={<Switch onChange={handleLightHelperChange} checked={lightHelperActive} />} label="light position indicator" />
                 <FormControlLabel className='' control={<Switch onChange={handleOrbitControlsChange} checked={orbitControlsActive} />} label="orbit controls" />
             </PopUp>
         </div>

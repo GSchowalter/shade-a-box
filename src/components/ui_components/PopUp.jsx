@@ -12,19 +12,20 @@ export default function PopUp({ title,children }) {
   return (
     <div>
       <Popup trigger=
-        {<Button className="h1" variant="contained"> {title} </Button>}
-        modal nested>
+        {<Button variant="contained"> {title} </Button>}
+        position={['top center', 'bottom center']}>
         {
           close => (
             <div className='flex flex-col bg-black p-4 justify-evenly'>
-              <div className='content'>
+              <div className='h1 text-white text-center mb-4'>
                 {title}
               </div>
+              <div className="border-t border-white p-1"></div>
               {children}
               <div className="pt-3">
                 <Button  onClick=
                   {() => close()} variant="contained">
-                  Close modal
+                  Close
                 </Button>
               </div>
             </div>
