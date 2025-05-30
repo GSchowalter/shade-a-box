@@ -35,7 +35,7 @@ export default function Home() {
       <br />
       <h2 className="text-2xl font-bold mb-4">About This Project</h2>
       <p className="mb-6">
-        I built this tool mainly for myself and thought others would benefit as well. I believe studying simple forms like these is a great way to work towards mastery.
+        I built this tool mainly for myself and thought others would benefit as well. Studying simple forms like these is a great way to work towards mastery.
         Improving your understanding of light and shadow starts by building a rock solid foundation with basic forms. Use this tool to lay the bricks that your sky scrapper will one day stand on. Or just to stay fresh. <br /> <br />
       </p>
 
